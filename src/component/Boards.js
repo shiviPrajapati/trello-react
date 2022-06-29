@@ -1,9 +1,8 @@
-import "./styles/Boards.css"
+
 import React, { Component } from "react";
 import axios from "axios";
-import { createBoard } from "./Apis";
-import { Link } from "react-router-dom";
-import { Button, Card, Modal } from "react-bootstrap";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Button, Modal } from "react-bootstrap";
 
 
 class Boards extends Component {
@@ -11,18 +10,20 @@ class Boards extends Component {
   state = {
     boards: [],
     showBoard: false,
+    loading: false,
     title: ""
   }
 
   componentDidMount = () => {
     axios.get("https://api.trello.com/1/members/me/boards?key=4707113ae4bb574864bf59a341bf98bf&token=0b1757680dc35a102d1bc0c026e4991bec39da3dd026dd757d5f6a988c5cfde9")
       .then((res) => this.setState({
-        boards: res.data
+        boards: res.data,
+        loading: !this.state.loading
       }))
   }
 
   addNewBoard = (title) => {
-    createBoard(title)
+    axios.post(`https://api.trello.com/1/boards/?name=${title}&key=4707113ae4bb574864bf59a341bf98bf&token=0b1757680dc35a102d1bc0c026e4991bec39da3dd026dd757d5f6a988c5cfde9`)  
       .then((res) => res.data)
       .then((newBoard) => {
         this.setState({
@@ -48,34 +49,31 @@ class Boards extends Component {
 
 
   render() {
-    console.log(this.state.boards)
     return (
-      <div className="d-flex justify-content-center flex-wrap board-containers m-auto">
+      <div>
+        {this.state.loading && <></>}
+      <div className="d-flex justify-content-center flex-wrap m-auto">
         {
           this.state.boards.map((board) =>
-          <Card style={{width:"300px", height:"180px", margin:"20px", backgroundColor:"gray"}}>
-            <Link style={{textDecoration:"none", color:"black"}} to={`/boards/${board.id}`} className="" key={board.id}>
-              <Card.Title>{board.name}</Card.Title>
-            </Link></Card>
+            <Link className="board" to={`/boards/${board.id}`} key={board.id}>
+             {board.name}
+            </Link>
           )
         }
 
 
-        <Card style={{
-          width:"300px", height:"180px", margin:"20px", backgroundColor:"gray"
-        }} className="" onClick={this.handleBoard}>
-          <div className="boards-status">
-            <h5 style={{marginTop:"20px"}} className="text-center">Create New Board</h5>
+       
+        <div onClick={this.handleBoard} className="new-board">
+          <div>
+            <h5 className="text-center">Create New Board</h5>
           </div>
-        </Card>
-
+</div>
         <div>
           <Modal show={this.state.showBoard} onHide={this.handleBoard}>
             <Modal.Header closeButton>Board Title</Modal.Header>
 
             <Modal.Body>
               <input
-                className="modal-input"
                 onChange={this.handleChange}
                 value={this.state.title}
                 type="text"
@@ -88,7 +86,7 @@ class Boards extends Component {
           </Modal>
         </div>
       </div>
-
+</div>
     )
   }
 

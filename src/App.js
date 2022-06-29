@@ -1,18 +1,20 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route , Redirect, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
 import Boards from './component/Boards';
-import EachBoard from './EachBoard';
+import EachBoard from './component/EachBoard';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-        
-          <Route path="/" element={<Boards/>}></Route>
-          <Route path='/boards/:id' element={<EachBoard></EachBoard>}></Route>
-        </Routes>
+        <Switch>
+        <Route exact path="/">
+              <Redirect to="/boards" />
+            </Route>
+          <Route exact path="/boards" component={Boards}></Route>
+          <Route exact path='/boards/:boardId' component={EachBoard}></Route>
+        </Switch>
       </BrowserRouter>
     </div>
   );
