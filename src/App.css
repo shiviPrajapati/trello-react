@@ -109,3 +109,54 @@
   width: 300px;
   justify-content:space-around;
 }
+
+.addListItemBtn{
+  width: 95%;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  margin: 5px;
+  padding: 6px;
+  color: gray;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.addListItemBtn:hover{
+  background-color: #d9dce2;
+  color: #000;
+}
+
+.listItemModule{
+  margin-left: 5px;
+  width: 95%;
+}
+
+.cardTitle{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  padding: 4px;
+  width: 100%;
+}
+
+.closeCardModule{
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.dltListItemBtn{
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+}
+
+.cardItem{
+  width: 95%;
+  background-color: white;
+  display: flex;
+  justify-content:space-between;
+  padding: 8px;
+  border-radius: 4px;
+  margin: 5px;
+}
