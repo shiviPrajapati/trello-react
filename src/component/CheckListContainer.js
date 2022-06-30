@@ -82,7 +82,8 @@ class CheckListContainer extends Component{
                       <span className="dltChecklist" onClick={() => this.deleteList(checkList.id)}>delete</span>
                     </div>
                     <div>
-                      <CheckListItem checkList={checkList}>                        
+                      <CheckListItem checkList={checkList}
+                        CardDetails= {this.props.CardDetails}>                        
                       </CheckListItem>                      
                     </div>
                   </div>

@@ -45,6 +45,18 @@ class CheckListItem extends Component{
         }))
     }
 
+    checkItem = (e,cardId, id) => {
+        axios.put(`https://api.trello.com/1/cards/${cardId}/checkItem/${id}?state=${e.target.checked}&key=4707113ae4bb574864bf59a341bf98bf&token=0b1757680dc35a102d1bc0c026e4991bec39da3dd026dd757d5f6a988c5cfde9`)
+        .then((res) => this.setState({
+            checklistItem: this.state.checklistItem.map((item) => {
+                if(item.id === id)
+                    item.state = res.data.state
+                
+                return item
+            })
+        }))
+    }
+
 
     render() {
         return (
@@ -55,8 +67,13 @@ class CheckListItem extends Component{
                             return(
                                 <div className="listItem" key={checkList.id}>
                                     <div>
-                                        <input className="checkBox" type="checkbox"></input>
-                                        <span style={{marginLeft:"5px"}}>{checkList.name}</span>
+                                        <input className="checkBox" onChange={(e) => this.checkItem(e,this.props.CardDetails.id, checkList.id)} checked={checkList.state ==='complete'?true:false} type="checkbox"></input>
+                                        {checkList.state === 'complete' ? (
+                                            <span style={{marginLeft:"5px", textDecoration:"line-through", fontStyle:"italic"}}>{checkList.name}</span>
+                                        ):(
+                                            <span style={{marginLeft:"5px"}}>{checkList.name}</span>
+                                        )}
+                                        
                                     </div>
                                     <span style={{cursor:"pointer"}}  onClick={() => this.deleteChecklistItem(checkList.id)}>X</span>
                                 </div>
