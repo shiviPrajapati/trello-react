@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Component } from "react";
 import { Button } from "react-bootstrap";
+import CheckListItem from "./CheckListItem";
 
 class CheckListContainer extends Component{
 
@@ -62,7 +63,7 @@ class CheckListContainer extends Component{
                 </div>
                 <div className="checklistAddBtn">
                   <Button style={{marginRight:"20px"}} onClick={this.handleSubmit}>Add </Button>
-                  <span onClick={this.handleChange}>Cancle</span>
+                  <span style={{cursor:"pointer"}} onClick={this.handleChange}>Cancle</span>
                 </div>
                 
               </div>
@@ -81,9 +82,12 @@ class CheckListContainer extends Component{
                       <span className="dltChecklist" onClick={() => this.deleteList(checkList.id)}>delete</span>
                     </div>
                     <div>
-                      <button className="addCheckListBtn">Add an item</button>
+                      <CheckListItem checkList={checkList}>                        
+                      </CheckListItem>                      
                     </div>
                   </div>
+
+                  
                 </div>
               )
             })

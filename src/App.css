@@ -226,3 +226,21 @@
   margin-bottom: 5px;
   height: 40px;
 }
+
+.addChecklistItemTitle{
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid rgb(39, 116, 231);
+}
+
+.listItem{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
