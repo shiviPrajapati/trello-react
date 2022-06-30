@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
+import CheckListContainer from "./CheckListContainer";
 
 class Cards extends Component {
 
@@ -8,6 +9,8 @@ class Cards extends Component {
         cards: [],
         addCard: true,
         inputCardTitle: "",
+        checkListModal: false,
+        checkCard: ""
     }
 
     componentDidMount = () => {
@@ -55,6 +58,20 @@ class Cards extends Component {
             })
     }
 
+    createCheckListModule = (card) => {
+        console.log(card.name)
+        this.setState({
+            checkListModal: !this.state.checkListModal,
+            checkCard: card
+        })
+    }
+
+    handleCheckList = () => {
+        this.setState({
+            checkListModal: !this.state.checkListModal
+        })
+    }
+
     render() {
         return (
             <div>
@@ -65,10 +82,30 @@ class Cards extends Component {
                                 <div key={card.id}>
                                     <div className="cardContainer">
                                         <div className="cardItem">
-                                            <div className="cardName">{card.name} </div>
+                                            <div style={{cursor:"pointer"}} onClick={() => this.createCheckListModule(card)}>{card.name} </div>
                                             <span className="dltListItemBtn" onClick={() => this.deleteCard(card.id)}> X </span>
                                         </div>
+                                        
                                     </div>
+
+                                    
+                                    <div className="checkListModal">
+                                        
+                                        <Modal show={this.state.checkListModal} onHide={this.handleCheckList}>
+                                            <Modal.Header closeButton>
+                                                <div className="modalHeader">
+                                                    <div className="cardName">~ {this.state.checkCard.name}</div>
+                                                    <div style={{marginLeft:"20px"}}>In List {this.props.cardsOfList.name}</div>
+                                                </div>
+                                                
+                                            </Modal.Header> 
+                                            <CheckListContainer CardDetails={this.state.checkCard}
+                                                handleChecklistModal={this.handleCheckList}
+                                                listDetail={this.props.cardsOfList} />
+                                        </Modal>
+                                    </div>
+
+
                                 </div>
                             )
                         })
@@ -78,12 +115,12 @@ class Cards extends Component {
                 <div>
                     {
                         this.state.addCard ? (
-                            <button className="addListItemBtn" onClick={this.createCard}>Add New Item</button>
+                            <button className="addListItemBtn" onClick={this.createCard}> + Add a card</button>
                         ) : (
                             <div className="listItemModule">
-                                <input className="cardTitle" onChange={this.handleInput}></input>
+                                <input className="cardTitle" placeholder="Enter a title for this card..." onChange={this.handleInput}></input>
                                 <div>
-                                    <Button onClick={() => this.addCard(this.props.cardsOfList.id)}>Add Item </Button>
+                                    <Button onClick={() => this.addCard(this.props.cardsOfList.id)}>Add card</Button>
                                     <span className="closeCardModule" onClick={this.closeCard}> X </span>
                                 </div>
                             </div>

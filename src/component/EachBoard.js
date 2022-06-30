@@ -89,13 +89,13 @@ class EachBoard extends Component {
                 {
                     this.state.listAdd ? (
                         <div>
-                            <button className="createListBtn" style={{ color: "gray" }} onClick={this.createList}>Add New List</button>
+                            <button className="createListBtn" onClick={this.createList}>+ Add another list</button>
                         </div>
                     ) : (
                         <div className="listModule">
-                            <input className="addListInput" type="text" onChange={this.handleInput} value={this.state.inputTitle} placeholder="Enter title"></input>
+                            <input className="addListInput" type="text" onChange={this.handleInput} value={this.state.inputTitle} placeholder="Enter list title..."></input>
                             <div className="addListDiv">
-                                <Button onClick={() => this.addList(this.props.match.params.boardId)}>Add List</Button>
+                                <Button onClick={() => this.addList(this.props.match.params.boardId)}>Add list</Button>
                                 <span onClick={this.removeList}> X </span>
                             </div>
                         </div>
