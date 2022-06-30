@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: "Nunito",sans-serif;;
+  font-family: "Nunito",sans-serif;
 }
 
 
@@ -8,6 +8,27 @@
   width: 100%;
   height: 100vh;
 }
+
+.nav{
+  background-color: rgba(87, 96, 121, 0.973);
+  height: 60px;
+  color: white;
+  display: flex;
+}
+
+.navLink{
+  text-decoration: none;
+  color: white;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.navTitle{
+  margin-left: 50px;
+  font-weight: bold;
+  font-size: 40px;
+}
+
 
 .new-board {
   margin: 1rem;
@@ -45,12 +66,13 @@
 
 .lists{
   background-image: url("/home/shivi/trello-react-shivi/public/images/back1.jpg");
-    height: 94vh;
-    width: fit-content;
+    height: 100vh;
+    width: 100vw;
     background-size: cover;
     background-repeat: no-repeat;
     overflow-y: scroll;
     overflow-x: scroll;
+    flex-wrap: wrap;
 }
 
 .outerListContainer{
@@ -59,7 +81,7 @@
   align-items: flex-start;
   overflow-x: auto;
   background-size: cover;
-  height: 100vh;
+  height: fit-content;
 }
 
 .listContainer{
